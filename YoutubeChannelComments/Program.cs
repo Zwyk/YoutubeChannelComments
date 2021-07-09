@@ -109,11 +109,12 @@ namespace YoutubeChannelComments
                 output.average = results.Average(r => r.comments);
                 output.stdev = Math.Sqrt(results.Sum(r => Math.Pow(r.comments - output.average, 2)) / results.Count);
 
-                print("Finished");
-
                 Directory.CreateDirectory("Results");
 
-                File.WriteAllText(@"Results\Result" + DateTime.Now.ToString(" - yyyyMMdd_HHmmss_fff") + ".json", JsonConvert.SerializeObject(output, Formatting.Indented));
+                string file = @"Results\Result" + DateTime.Now.ToString(" - yyyyMMdd_HHmmss_fff") + ".json";
+                File.WriteAllText(file, JsonConvert.SerializeObject(output, Formatting.Indented));
+
+                print("Finished, results written in : " + file);
             }
             catch (Exception e)
             {
